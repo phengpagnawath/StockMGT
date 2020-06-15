@@ -26,7 +26,15 @@ public class Constants {
     public final static String QTY = "Quantity";
     public final static String UNIT_PRICE = "Unit Price";
     public final static String IMP_DATE = "Import Date";
+    public final static String[] PRODUCT_HEADER={"ID","Product's Name","Quantity","Unit Price","Import Date"};
     public final static String INSERT_DATA_SUCCESS="Your product insert successful..!";
+    public final static String INSERT_DATA_FAIL="Your product insert fail..!";
+
+    public final static String PRESS_KEY_ENTER="Press key \"Enter\" to continues ....";
+
+    public final static String PRODUCT_NOT_FOUND="Your product's ID doesn't exist ..!";
+    public final static String PRODUCT_IS_FOUND="Your product info is Above...!";
+
 
     public final static String MENU_VIEW1 = "(*)Display | (W)rite | (R)ead | (U)date | (F)irst | (P)revious | (N)ext |" +
             "Last";
@@ -37,5 +45,7 @@ public class Constants {
     public final static String PRODUCT_NAME = "Product's name : ";
     public final static String PRODUCT_PRICE = "Product's price : ";
     public final static String PRODUCT_QTY = "Product's quantity : ";
+    public final static String ENTER="Enter ";
+    public final static String PAGE_NUMBER="page number -> ";
 
 }

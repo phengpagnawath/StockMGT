@@ -10,10 +10,12 @@ public class Product {
     private double price;
     private Date impDate;
 
-    public Product(String name, int qty, double price) {
+    public Product(int id, String name, int qty, double price) {
+        this.id = id;
         this.name = name;
         this.qty = qty;
         this.price = price;
+        this.impDate = new Date();
     }
 
     public Product(int id, String name, int qty, double price, Date impDate) {
