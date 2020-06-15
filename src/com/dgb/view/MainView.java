@@ -29,6 +29,7 @@ public class MainView {
 
 
     public static void main(String[] args) {
+        ProductView.currentPage=1;
         MainView mainView = new MainView();
         MenuView menuView=new MenuView();
         mainView.mainView();

@@ -11,7 +11,6 @@ public class MenuController {
     ProductController productController=new ProductController();
     PageController pageController = new PageController();
     public int row;
-    Scanner scanner=new Scanner(System.in);
 
     public void menu(String choice) {
         ProductView.rowSet = FileIO.readFile();
@@ -29,6 +28,10 @@ public class MenuController {
                 productController.readProduct();
                 break;
             }
+            case "u":{
+                productController.updateProduct();
+                break;
+            }
             case "o":{
                 row= Utils.inputInteger(Constants.SET_PAGE_ROW);
                 FileIO.writeFile(row);
@@ -36,7 +39,27 @@ public class MenuController {
                 break;
             }
             case "g":{
-                pageController.gotoPage();
+                pageController.gotoPageNum();
+                break;
+            }
+            case "f":{
+                pageController.gotoFirstPage();
+                break;
+            }
+            case "p":{
+                pageController.gotoPrevious();
+                break;
+            }
+            case "l":{
+                pageController.gotoLast();
+                break;
+            }
+            case "n":{
+                pageController.gotoNext();
+                break;
+            }
+            case "s":{
+                productController.searchProduct();
                 break;
             }
             case "e":{

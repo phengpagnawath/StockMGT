@@ -4,12 +4,36 @@ import javax.print.DocFlavor;
 
 public class SQLConstants {
     public static String SELECT(String tb,String oBy,int offset,int limit){
-        return "Select * from " + tb + " order by "+ oBy + " offset " + offset +
+        String sql="Select * from " + tb + " order by "+ oBy + " offset " + offset +
                 " limit "+ limit ;
+        //System.out.println(sql);
+        return sql;
+    }
+    public static String SEARCH_NAME(String tb,String field,String search,String oBy){
+        //System.out.println("Select * from " + tb + "where lower("+ field +") like '%"+ search.toLowerCase() +"%' order by "+ oBy);
+        return "Select * from " + tb + "where lower("+ field +") like '%"+ search.toLowerCase() +"%' order by "+ oBy;
+    }
+
+
+    public static String UPDATE(String tb,int id,String[] tb_field,String[] tb_value){
+        String updateSQL;
+        int i;
+        updateSQL="Update " + tb + "set ";
+        for(i=0;i<tb_field.length;i++){
+            updateSQL+= tb_field[i] + "='"+tb_value[i]+"'";
+            if(i<tb_field.length-1)
+                updateSQL+=",";
+        }
+        updateSQL+=" where ID="+id;
+        return updateSQL;
     }
 
     public static String COUNT(String tb){
         return "Select count(*) from" + tb;
+    }
+
+    public static String SELECT_MAX(String tb, String tb_field){
+        return "Select Max(" + tb_field + ") from "+tb;
     }
 
 

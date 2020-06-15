@@ -1,0 +1,9 @@
+------------------------------------------------
+Create table products (
+    id int primary key ,
+    name varchar(150),
+    qty int,
+    price numeric,
+    imp_date date
+);
+------------------------------------------------

@@ -9,20 +9,21 @@ import org.nocrala.tools.texttablefmt.ShownBorders;
 import org.nocrala.tools.texttablefmt.Table;
 
 import java.util.List;
-import java.util.Scanner;
-import java.util.zip.CheckedOutputStream;
 
 public class ProductView {
-    public static int page, rowSet;
-    public static int currentPage = 1;
+    public static int rowSet;
+    public static int offset = 0;
     public static int totalRecord;
-    Scanner scanner = new Scanner(System.in);
+    public static int currentPage;
+    public static  int page;
+    //Scanner scanner = new Scanner(System.in);
     CellStyle cellCenterStyle = new CellStyle(CellStyle.HorizontalAlign.center);
     CellStyle cellLeftStyle = new CellStyle(CellStyle.HorizontalAlign.left);
     CellStyle cellRightStyle = new CellStyle(CellStyle.HorizontalAlign.right);
 
     public void displayAllProduct(List<Product> products) {
         int col = 5;
+
         Table table = new Table(col);
         for (int i = 0; i < col; i++) {
             table.setColumnWidth(i, 29, 32);
@@ -46,7 +47,11 @@ public class ProductView {
         for (int i = 0; i < 2; i++) {
             tableFooter.setColumnWidth(i, 74, 80);
         }
-        page = (int) Math.ceil(totalRecord / (double) rowSet);
+        //page = (int) Math.ceil(totalRecord / (double) rowSet);
+        if(totalRecord%rowSet==0)
+            page =totalRecord/rowSet;
+        else
+            page=totalRecord/rowSet+1;
         tableFooter.addCell("Page: " + (currentPage) + " of " + page, cellLeftStyle);
         tableFooter.addCell("Total record: " + totalRecord , cellRightStyle);
         System.out.println(table.render());
@@ -79,6 +84,10 @@ public class ProductView {
 
     public int readProductView() {
         return Utils.inputInteger(Constants.ENTER + Constants.PRODUCT_ID);
+    }
+
+    public String searchName(){
+        return Utils.inputString(Constants.ENTER+Constants.PRODUCT_NAME);
     }
 
 

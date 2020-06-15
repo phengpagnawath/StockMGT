@@ -1,7 +1,6 @@
 package com.dgb.controller;
 
 import com.dgb.model.Product;
-import com.dgb.model.ProductCrud;
 import com.dgb.model.ProductCrudImp;
 import com.dgb.utils.Constants;
 import com.dgb.utils.Utils;
@@ -22,19 +21,20 @@ public class ProductController {
     }
     public void displayProduct() {
         pageController.totalRecord();
-        productView.displayAllProduct(productCrudImpl.read(ProductView.currentPage,ProductView.rowSet));
+        productView.displayAllProduct(productCrudImpl.read(ProductView.offset,ProductView.rowSet));
+    }
+    public void searchProduct(){
+        List<Product> productSearch=productCrudImpl.searchByName(productView.searchName());
+        ProductView.totalRecord=productSearch.size();
+        productView.displayAllProduct(productSearch);
     }
 
     public void insertProduct(){
-        List<Product> products=productCrudImpl.read(ProductView.currentPage,ProductView.rowSet);
-        int id=0;
-        for(Product product:products){
-            if(product.getId()>id)
-                id=product.getId();
-        }
-        Product product = productView.addProduct(id+1);
+        List<Product> products=productCrudImpl.read(ProductView.offset,ProductView.rowSet);
+        int id = productCrudImpl.maxID()+1;
+        Product product = productView.addProduct(id);
         if (product!=null) {
-            Product productInserted = productCrudImpl.write(product);
+            Product productInserted = productCrudImpl.create(product);
             if(productInserted!=null){
                 productView.showProduct(productInserted);
                 MsgView.showMessage(Constants.INSERT_DATA_SUCCESS);
@@ -45,16 +45,39 @@ public class ProductController {
             MsgView.showMessage(Constants.INSERT_DATA_FAIL);
         Utils.pressKeyEnter(Constants.PRESS_KEY_ENTER);
     }
+
     public void readProduct(){
         int id=productView.readProductView();
-        if (id!=0) {
+        if (id>0) {
             Product product = productCrudImpl.readByID(id);
             if(product!=null){
+                MsgView.showMessage(Constants.PRODUCT_UPDATED);
                 productView.showProduct(product);
                 //MsgView.showMessage(Constants.PRODUCT_IS_FOUND);
             }else
                 MsgView.showMessage(Constants.PRODUCT_NOT_FOUND);
         }else
             MsgView.showMessage(Constants.PRODUCT_NOT_FOUND);
+    }
+
+    public void updateProduct(){
+        int id=productView.readProductView();
+        if(id>0){
+            Product oldProduct = productCrudImpl.readByID(id);
+            if (oldProduct!=null){
+                MsgView.showMessage(Constants.UPDATE_PRODUCT);
+                Product newProduct = productView.addProduct(id);
+                if (newProduct!=null) {
+                    Product product =productCrudImpl.update(newProduct);
+                    if (product!=null) {
+                        productView.showProduct(product);
+                    }else
+                        MsgView.showMessage(Constants.UPDATE_DATA_FAIL);
+                }else
+                    MsgView.showMessage(Constants.PRODUCT_NOT_FOUND);
+            }else
+                MsgView.showMessage(Constants.PRODUCT_NOT_FOUND);
+        }else
+            MsgView.showMessage(Constants.INPUT_INCORRECT);
     }
 }
