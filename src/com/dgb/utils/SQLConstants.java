@@ -1,5 +1,7 @@
 package com.dgb.utils;
 
+import com.dgb.view.ProductView;
+
 import javax.print.DocFlavor;
 
 public class SQLConstants {
@@ -11,8 +13,13 @@ public class SQLConstants {
     }
     public static String SEARCH_NAME(String tb,String field,String search,String oBy){
         //System.out.println("Select * from " + tb + "where lower("+ field +") like '%"+ search.toLowerCase() +"%' order by "+ oBy);
-        return "Select * from " + tb + "where lower("+ field +") like '%"+ search.toLowerCase() +"%' order by "+ oBy;
+        return "Select * from " + tb + "where lower("+ field +") like '%"+ search.toLowerCase() +"%' order by "+ oBy
+                +" offset " + ProductView.offset + " limit "+ ProductView.rowSet;
     }
+    public static String SELECT_COUNT_NAME(String tb,String field,String search){
+        return "Select Count(*) from " + tb + "where lower("+ field +") like '%"+ search.toLowerCase() +"%'";
+    }
+
 
 
     public static String UPDATE(String tb,int id,String[] tb_field,String[] tb_value){

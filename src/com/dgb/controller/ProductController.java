@@ -24,9 +24,15 @@ public class ProductController {
         productView.displayAllProduct(productCrudImpl.read(ProductView.offset,ProductView.rowSet));
     }
     public void searchProduct(){
-        List<Product> productSearch=productCrudImpl.searchByName(productView.searchName());
-        ProductView.totalRecord=productSearch.size();
-        productView.displayAllProduct(productSearch);
+        String name = productView.searchName();
+        pageController.totalSearchRecord(name);
+        List<Product> productSearch=productCrudImpl.searchByName(name);
+        if(productSearch.size()>0) {
+            ProductView.totalRecord = productSearch.size();
+            productView.displayAllProduct(productSearch);
+        }else {
+            MsgView.showMessage(Constants.PRODUCT_NAME_NOT_FOUND);
+        }
     }
 
     public void insertProduct(){

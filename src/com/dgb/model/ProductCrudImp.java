@@ -59,6 +59,7 @@ public class ProductCrudImp implements ProductCrud {
         return null;
     }
 
+
     @Override
     public int count() {
         DBCon con = new DBCon();
@@ -138,6 +139,23 @@ public class ProductCrudImp implements ProductCrud {
             con.closeCon();
         }
         return null;
+    }
+
+    @Override
+    public int countBySearch(String search) {
+        DBCon con = new DBCon();
+        try {
+            Statement stmt = con.openCon().createStatement();
+            ResultSet rs = stmt.executeQuery(SQLConstants.SELECT_COUNT_NAME(SQLConstants.TB_PRODUCT
+                    ,SQLConstants.TB_PRODUCT_FIELD[1],search));
+            rs.next();
+            return rs.getInt(1);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            con.closeCon();
+        }
+        return 0;
     }
 
     public Product readByID(int findID) {

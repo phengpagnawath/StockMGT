@@ -16,9 +16,10 @@ public class PageController {
     public PageController() {
         productView = new ProductView();
         productCrudImp = new ProductCrudImp();
+        totalRecord();
     }
 
-    public void setLimitPage(){
+    public void setLimitPage() {
         if (ProductView.totalRecord % ProductView.rowSet == 0)
             limitPage = ProductView.totalRecord / ProductView.rowSet;
         else
@@ -27,7 +28,15 @@ public class PageController {
 
     public void gotoPageNum() {
         pageNum = Utils.inputInteger(Constants.ENTER + Constants.PAGE_NUMBER);
-        gotoPage(pageNum);
+        setLimitPage();
+        if (pageNum >= 1 && pageNum < limitPage)
+            gotoPage(pageNum);
+        else if (pageNum < 1) {
+            MsgView.showMessage(Constants.PAGE_CANNOT_DISPLAY);
+        } else {
+            MsgView.showMessage(Constants.OUT_OF_LIMIT);
+            //gotoLast();
+        }
     }
 
     public void gotoFirstPage() {
@@ -71,5 +80,8 @@ public class PageController {
 
     public void totalRecord() {
         ProductView.totalRecord = productCrudImp.count();
+    }
+    public void totalSearchRecord(String search){
+        ProductView.totalRecord=productCrudImp.countBySearch(search);
     }
 }

@@ -54,4 +54,7 @@ public class Constants {
 
     public final static String ALREADY_FIRST_PAGE="You already on first page!";
     public final static String ALREADY_LAST_PAGE="You already on last page!";
+    public final static String OUT_OF_LIMIT="This page is out...!";
+    public final static String PAGE_CANNOT_DISPLAY="This page cannot display ...!";
+    public final static String PRODUCT_NAME_NOT_FOUND="This product doesn't exist ..!";
 }

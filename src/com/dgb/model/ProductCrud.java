@@ -9,5 +9,6 @@ public interface ProductCrud {
     int maxID();
     Product update(Product product);
     List<Product> searchByName(String search);
+    int countBySearch(String search);
 
 }
