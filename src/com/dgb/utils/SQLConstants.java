@@ -12,9 +12,10 @@ public class SQLConstants {
         return sql;
     }
     public static String SEARCH_NAME(String tb,String field,String search,String oBy){
-        //System.out.println("Select * from " + tb + "where lower("+ field +") like '%"+ search.toLowerCase() +"%' order by "+ oBy);
-        return "Select * from " + tb + "where lower("+ field +") like '%"+ search.toLowerCase() +"%' order by "+ oBy
+        String sql="Select * from " + tb + "where lower("+ field +") like '%"+ search.toLowerCase() +"%' order by "+ oBy
                 +" offset " + ProductView.offset + " limit "+ ProductView.rowSet;
+        System.out.println(sql);
+        return sql;
     }
     public static String SELECT_COUNT_NAME(String tb,String field,String search){
         return "Select Count(*) from " + tb + "where lower("+ field +") like '%"+ search.toLowerCase() +"%'";

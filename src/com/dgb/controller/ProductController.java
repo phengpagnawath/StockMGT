@@ -25,10 +25,10 @@ public class ProductController {
     }
     public void searchProduct(){
         String name = productView.searchName();
-        pageController.totalSearchRecord(name);
+        //pageController.totalSearchRecord(name);
         List<Product> productSearch=productCrudImpl.searchByName(name);
         if(productSearch.size()>0) {
-            ProductView.totalRecord = productSearch.size();
+            ProductView.totalRecord = productCrudImpl.countBySearch(name);
             productView.displayAllProduct(productSearch);
         }else {
             MsgView.showMessage(Constants.PRODUCT_NAME_NOT_FOUND);

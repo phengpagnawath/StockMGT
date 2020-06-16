@@ -81,7 +81,9 @@ public class PageController {
     public void totalRecord() {
         ProductView.totalRecord = productCrudImp.count();
     }
+    /*
     public void totalSearchRecord(String search){
         ProductView.totalRecord=productCrudImp.countBySearch(search);
     }
+    */
 }
