@@ -16,6 +16,9 @@ public class PageController {
     public PageController() {
         productView = new ProductView();
         productCrudImp = new ProductCrudImp();
+    }
+
+    public void setLimitPage(){
         if (ProductView.totalRecord % ProductView.rowSet == 0)
             limitPage = ProductView.totalRecord / ProductView.rowSet;
         else
@@ -42,11 +45,13 @@ public class PageController {
     }
 
     public void gotoLast() {
+        setLimitPage();
         pageNum = limitPage;
         gotoPage(pageNum);
     }
 
     public void gotoNext() {
+        setLimitPage();
         if (pageNum < limitPage)
             pageNum = pageNum + 1;
         else
